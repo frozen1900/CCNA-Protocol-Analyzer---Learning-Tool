@@ -118,7 +118,7 @@ function highlightMode(mode) {
     
     document.getElementById('content').innerHTML = contentHTML;
 
-    // Mobile: Erstelle Info Box unter dem geklickten Element
+    // Mobile: Erstelle Info Box direkt nach dem geklickten Element
     if (window.innerWidth <= 768) {
         const mobileInfoHTML = `
             <div class="mobile-info-box">
@@ -135,36 +135,31 @@ function highlightMode(mode) {
             </div>
         `;
         
-        // Finde die row-group des geklickten Feldes oder den Button-Container
-        let targetContainer;
+        // Erstelle das Element
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = mobileInfoHTML;
+        const mobileBox = tempDiv.firstElementChild;
         
-        // Prüfe ob es ein Feld im Diagramm ist
+        // Finde das geklickte Feld im Diagramm
         const clickedField = document.querySelector(`[data-id="${mode}"]`);
+        
         if (clickedField) {
-            targetContainer = clickedField.closest('.row-group');
+            // Feld gefunden - füge nach der row ein
+            const parentRow = clickedField.closest('.row');
+            if (parentRow) {
+                parentRow.insertAdjacentElement('afterend', mobileBox);
+            }
         } else {
-            // Falls es ein Button ist (eth_h, ip_h, etc.), füge nach dem Diagramm ein
-            targetContainer = document.querySelector('.diagram');
+            // Kein Feld gefunden - muss ein Button sein (eth_h, ip_h, etc.)
+            // Füge nach dem Button-Container ein
+            const navButtons = document.getElementById('nav-buttons');
+            navButtons.insertAdjacentElement('afterend', mobileBox);
         }
         
-        if (targetContainer) {
-            // Erstelle temporäres Element
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = mobileInfoHTML;
-            const mobileBox = tempDiv.firstElementChild;
-            
-            // Füge nach dem Container ein
-            if (targetContainer.classList.contains('row-group')) {
-                targetContainer.appendChild(mobileBox);
-            } else {
-                targetContainer.appendChild(mobileBox);
-            }
-            
-            // Scrolle zur Info Box
-            setTimeout(() => {
-                mobileBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100);
-        }
+        // Kurz warten und dann zur Box scrollen
+        setTimeout(() => {
+            mobileBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
     }
 
     // Check if this is a composite mode (multiple fields)
@@ -193,6 +188,7 @@ function highlightMode(mode) {
         });
     }
 }
+
 
 /**
  * Resets all highlighting and dimming effects
