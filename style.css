@@ -279,12 +279,14 @@ body {
 .mobile-info-box {
     background: white;
     padding: 16px;
-    margin: 8px 0;
+    margin: 12px 0 0 0;
     border-radius: var(--radius-md);
     border: 2px solid var(--alert);
+    border-top: 4px solid var(--alert);
     box-shadow: 0 4px 12px var(--shadow);
     animation: slideDown 0.3s ease;
     width: 100%;
+    box-sizing: border-box;
 }
 
 @keyframes slideDown {
@@ -325,13 +327,256 @@ body {
     font-size: 13px;
 }
 
-/* Desktop: Mobile Info Box verstecken */
-@media (min-width: 769px) {
-    .mobile-info-box {
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    .info-panel {
+        max-height: none;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .nav-container {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .lang-switch {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        flex-direction: row;
+        gap: 5px;
+    }
+    
+    .lang-switch button {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 36px;
+    }
+    
+    h1 {
+        font-size: 20px;
+        text-align: center;
+        margin: 0 0 12px 0;
+        padding-right: 90px;
+    }
+    
+    .concept-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        width: 100%;
+    }
+    
+    .btn {
+        padding: 12px 10px;
+        font-size: 11px;
+        min-height: 48px;
+        white-space: normal;
+        line-height: 1.3;
+    }
+    
+    .btn.reset-btn {
+        grid-column: span 2;
+    }
+    
+    .main-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .diagram {
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .row-group {
+        padding: 10px;
+        gap: 6px;
+        position: relative;
+    }
+    
+    .group-label {
+        font-size: 11px;
+        margin-bottom: 4px;
+        font-weight: 800;
+    }
+    
+    .row {
+        flex-wrap: wrap;
+        gap: 4px;
+        width: 100%;
+    }
+    
+    .field {
+        padding: 10px 6px;
+        font-size: 10px;
+        min-height: 44px;
+        flex: 1 1 auto;
+    }
+    
+    .field b {
+        font-size: 11px;
+        margin-bottom: 3px;
+        word-break: break-word;
+    }
+    
+    .field span {
+        font-size: 9px;
+    }
+    
+    /* Preamble und SFD nebeneinander */
+    .field.w-7 {
+        flex: 3 1 65%;
+        min-width: 180px;
+    }
+    
+    .field.w-1 {
+        flex: 1 1 30%;
+        min-width: 80px;
+    }
+    
+    /* MAC-Adressen nebeneinander */
+    .field.w-mac {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 140px;
+    }
+    
+    /* Type volle Breite */
+    .field.w-typ {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+    
+    /* Kleine Bit-Felder nebeneinander */
+    .field.bits-4 {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 75px;
+    }
+    
+    .field.bits-6 {
+        flex: 1.5 1 60%;
+        min-width: 90px;
+    }
+    
+    .field.bits-2 {
+        flex: 0.8 1 35%;
+        min-width: 65px;
+    }
+    
+    .field.bits-3 {
+        flex: 1 1 30%;
+        min-width: 70px;
+    }
+    
+    .field.bits-13 {
+        flex: 2 1 65%;
+        min-width: 140px;
+    }
+    
+    /* Total Length, Identification, etc */
+    .field.w-2 {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 110px;
+    }
+    
+    /* IP-Adressen volle Breite */
+    .field.w-4 {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+    
+    /* Options und Padding nebeneinander */
+    .field.w-opt {
+        flex: 2 1 65%;
+        min-width: 140px;
+    }
+    
+    .field.w-pad {
+        flex: 1 1 30%;
+        min-width: 80px;
+    }
+    
+    /* Payload und FCS */
+    .field.w-pld {
+        flex: 3 1 70%;
+        min-width: 200px;
+    }
+    
+    /* Desktop Info Panel ausblenden auf Mobile */
+    .info-panel {
         display: none;
     }
 }
 
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    h1 {
+        font-size: 16px;
+        padding-right: 85px;
+    }
+    
+    .lang-switch {
+        right: 8px;
+        top: 8px;
+    }
+    
+    .lang-switch button {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-height: 32px;
+    }
+    
+    .concept-nav {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn {
+        padding: 12px 10px;
+        font-size: 11px;
+        width: 100%;
+    }
+    
+    .btn.reset-btn {
+        grid-column: span 1;
+    }
+    
+    .field {
+        padding: 8px 4px;
+        font-size: 9px;
+        min-height: 40px;
+    }
+    
+    .field b {
+        font-size: 10px;
+    }
+    
+    .field span {
+        font-size: 8px;
+    }
+    
+    .field.w-7 {
+        flex: 1 1 60%;
+        min-width: 150px;
+    }
+    
+    .field.w-1 {
+        flex: 1 1 35%;
+        min-width: 70px;
+    }
+}
 
 @media (hover: none) and (pointer: coarse) {
     .field:active:not(.dimmed) {
@@ -342,5 +587,12 @@ body {
     .btn:active {
         transform: translateY(1px);
         opacity: 0.9;
+    }
+}
+
+/* Desktop: Mobile Info Box verstecken */
+@media (min-width: 769px) {
+    .mobile-info-box {
+        display: none;
     }
 }
