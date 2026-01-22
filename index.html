@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCNA Protocol Analyzer - Learning Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav-container">
+        <h1 id="main-title">CCNA Protocol Analyzer</h1>
+        <div class="lang-switch" role="group" aria-label="Language selection">
+            <button onclick="setLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
+            <button onclick="setLanguage('en')" aria-label="English">🇬🇧 EN</button>
+        </div>
+        <div id="nav-buttons" class="concept-nav" role="navigation" aria-label="Concept navigation"></div>
+    </nav>
+
+    <main class="main-layout">
+        <section class="diagram" aria-label="Protocol diagram">
+            <!-- Layer 1: Physical Sync -->
+            <div class="row-group">
+                <div class="group-label" id="label-l1">Layer 1 - Physical Sync</div>
+                <div class="row">
+                    <div class="field l1 w-7" data-id="pre" role="button" tabindex="0" aria-label="Preamble">
+                        <b>Preamble</b><span>7 Bytes</span>
+                    </div>
+                    <div class="field l1 n2 w-1" data-id="sfd" role="button" tabindex="0" aria-label="SFD">
+                        <b>SFD</b><span>1 Byte</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Ethernet Header -->
+            <div class="row-group">
+                <div class="group-label" id="label-l2">Layer 2 - Data Link Header</div>
+                <div class="row">
+                    <div class="field l2 w-mac" data-id="dmac" role="button" tabindex="0" aria-label="Destination MAC">
+                        <b>Destination MAC</b><span>6 Bytes</span>
+                    </div>
+                    <div class="field l2 n2 w-mac" data-id="smac" role="button" tabindex="0" aria-label="Source MAC">
+                        <b>Source MAC</b><span>6 Bytes</span>
+                    </div>
+                    <div class="field l2 w-typ" data-id="typ" role="button" tabindex="0" aria-label="EtherType">
+                        <b>Type</b><span>2 Bytes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 3: IPv4 Header -->
+            <div class="row-group">
+                <div class="group-label" id="label-l3">Layer 3 - Network Header (IPv4)</div>
+                
+                <div class="row">
+                    <div class="field l3 bits-4" data-id="ver" role="button" tabindex="0" aria-label="Version">
+                        <b>Ver</b><span>4 Bits</span>
+                    </div>
+                    <div class="field l3 n2 bits-4" data-id="ihl" role="button" tabindex="0" aria-label="IHL">
+                        <b>IHL</b><span>4 Bits</span>
+                    </div>
+                    <div class="field l3 bits-6" data-id="dscp" role="button" tabindex="0" aria-label="DSCP">
+                        <b>DSCP</b><span>6 Bits</span>
+                    </div>
+                    <div class="field l3 n2 bits-2" data-id="ecn" role="button" tabindex="0" aria-label="ECN">
+                        <b>ECN</b><span>2 Bits</span>
+                    </div>
+                    <div class="field l3 w-2" data-id="tl" role="button" tabindex="0" aria-label="Total Length">
+                        <b>Total Length</b><span>16 Bits</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field l3 w-2" data-id="id" role="button" tabindex="0" aria-label="Identification">
+                        <b>Identification</b><span>16 Bits</span>
+                    </div>
+                    <div class="field l3 n2 bits-3" data-id="flg" role="button" tabindex="0" aria-label="Flags">
+                        <b>Flags</b><span>3 Bits</span>
+                    </div>
+                    <div class="field l3 bits-13" data-id="off" role="button" tabindex="0" aria-label="Fragment Offset">
+                        <b>Fragment Offset</b><span>13 Bits</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field l3 w-1" data-id="ttl" role="button" tabindex="0" aria-label="TTL">
+                        <b>TTL</b><span>8 Bits</span>
+                    </div>
+                    <div class="field l3 n2 w-1" data-id="pro" role="button" tabindex="0" aria-label="Protocol">
+                        <b>Protocol</b><span>8 Bits</span>
+                    </div>
+                    <div class="field l3 w-2" data-id="chk" role="button" tabindex="0" aria-label="Header Checksum">
+                        <b>Header Checksum</b><span>16 Bits</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field l3 w-4" data-id="sip" role="button" tabindex="0" aria-label="Source IP Address">
+                        <b>Source IP Address</b><span>32 Bits</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field l3 w-4" data-id="dip" role="button" tabindex="0" aria-label="Destination IP Address">
+                        <b>Destination IP Address</b><span>32 Bits</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field l3 w-opt" data-id="opt" role="button" tabindex="0" aria-label="Options">
+                        <b>Options</b><span>0-40 Bytes</span>
+                    </div>
+                    <div class="field l3 n2 w-pad" data-id="pad" role="button" tabindex="0" aria-label="Padding">
+                        <b>Padding</b><span>variabel</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payload & Trailer -->
+            <div class="row-group">
+                <div class="group-label" id="label-payload">Payload & Trailer</div>
+                <div class="row">
+                    <div class="field data w-pld" data-id="pld" role="button" tabindex="0" aria-label="Data Payload">
+                        <b>Data (Payload)</b><span>46-1500 Bytes</span>
+                    </div>
+                    <div class="field l2 w-4" data-id="fcs" role="button" tabindex="0" aria-label="Frame Check Sequence">
+                        <b>FCS (Trailer)</b><span>4 Bytes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="info-panel" role="complementary" aria-label="Information panel">
+            <h2 id="title">CCNA Protocol Analyzer</h2>
+            <div id="content">
+                Select an element from the diagram or a button above to get detailed CCNA information.
+            </div>
+        </aside>
+    </main>
+
+    <script src="languages/lang_de.js"></script>
+    <script src="languages/lang_en.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
