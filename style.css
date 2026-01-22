@@ -285,7 +285,7 @@ body {
     font-weight: 700;
 }
 
-/* Responsive Design */
+/* Tablet Layout */
 @media (max-width: 1400px) {
     .main-layout {
         flex-direction: column;
@@ -293,20 +293,216 @@ body {
     
     .info-panel {
         max-height: none;
+        width: 100%;
     }
 }
 
+/* Mobile Layout - Large (Landscape) */
 @media (max-width: 768px) {
     body {
         padding: 10px;
     }
     
+    .nav-container {
+        gap: 10px;
+    }
+    
+    .lang-switch {
+        position: relative;
+        right: auto;
+        top: auto;
+        order: -1;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .concept-nav {
+        gap: 6px;
+    }
+    
+    .btn {
+        padding: 12px 16px;
+        font-size: 13px;
+        min-height: 48px;
+    }
+    
+    .diagram {
+        gap: 10px;
+    }
+    
+    .row-group {
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .group-label {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .row {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    
     .field {
-        padding: var(--spacing-sm);
+        padding: 12px 8px;
         font-size: 11px;
+        min-width: 60px !important;
+        min-height: 48px;
+        flex: 1 1 auto;
     }
     
     .field b {
         font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .field span {
+        font-size: 10px;
+    }
+    
+    /* Ensure full width for IP addresses on mobile */
+    .field.w-4 {
+        flex: 1 1 100% !important;
+        width: 100%;
+    }
+    
+    /* Make MAC addresses wrap better */
+    .field.w-mac {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 140px;
+    }
+    
+    /* Payload should be full width */
+    .field.w-pld {
+        flex: 1 1 100%;
+        min-width: 200px;
+    }
+    
+    .info-panel {
+        padding: 16px;
+    }
+    
+    .info-panel h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .info-panel p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    .why-box,
+    .calc-box {
+        padding: 12px;
+        margin: 12px 0;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Layout - Small (Portrait) */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    h1 {
+        font-size: 18px;
+    }
+    
+    .btn {
+        padding: 10px 12px;
+        font-size: 12px;
+        width: 100%;
+        min-height: 48px;
+    }
+    
+    .concept-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .lang-switch button {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+    
+    .field {
+        padding: 10px 6px;
+        font-size: 10px;
+        min-height: 44px;
+    }
+    
+    .field b {
+        font-size: 11px;
+    }
+    
+    .field span {
+        font-size: 9px;
+    }
+    
+    /* Force single column for small fields */
+    .field.bits-4,
+    .field.bits-6,
+    .field.bits-2,
+    .field.bits-3 {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 70px;
+    }
+    
+    .field.w-1,
+    .field.w-2 {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 80px;
+    }
+    
+    .field.w-typ {
+        flex: 1 1 100%;
+        min-width: 100px;
+    }
+    
+    .info-panel {
+        padding: 12px;
+    }
+    
+    .info-panel h2 {
+        font-size: 18px;
+    }
+    
+    .info-panel p {
+        font-size: 13px;
+    }
+    
+    .why-box,
+    .calc-box {
+        padding: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .why-box strong,
+    .calc-box strong {
+        font-size: 14px;
+    }
+}
+
+/* Touch improvements for all mobile devices */
+@media (hover: none) and (pointer: coarse) {
+    .field:active {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    }
+    
+    .btn:active {
+        transform: translateY(0);
+        opacity: 0.9;
     }
 }
