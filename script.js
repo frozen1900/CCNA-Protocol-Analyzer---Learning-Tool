@@ -83,17 +83,10 @@ function updateUI() {
  * Highlights a specific protocol field and displays its information
  * @param {string} mode - Field identifier
  */
-/**
- * Highlights a specific protocol field and displays its information
- * @param {string} mode - Field identifier
- */
 function highlightMode(mode) {
     // Toggle: Wenn derselbe Mode nochmal geklickt wird, reset ausführen
     if (currentMode === mode) {
         reset();
-        if (isMobile()) {
-            closeMobileModal();
-        }
         return;
     }
     
@@ -108,6 +101,7 @@ function highlightMode(mode) {
     // Aktuellen Mode speichern
     currentMode = mode;
 
+    // Desktop: Update Info Panel
     document.getElementById('title').innerText = info.t;
     
     const contentHTML = `
@@ -124,9 +118,53 @@ function highlightMode(mode) {
     
     document.getElementById('content').innerHTML = contentHTML;
 
-    // Auf Mobile: Modal öffnen
-    if (isMobile()) {
-        openMobileModal();
+    // Mobile: Erstelle Info Box unter dem geklickten Element
+    if (window.innerWidth <= 768) {
+        const mobileInfoHTML = `
+            <div class="mobile-info-box">
+                <h3>${info.t}</h3>
+                <p><strong>${currentDB.ui.title}:</strong> ${info.c}</p>
+                <div class="why-box">
+                    <strong>${currentDB.ui.whyHeader}</strong>
+                    ${info.why}
+                </div>
+                <div class="calc-box">
+                    <strong>${currentDB.ui.metricHeader}</strong>
+                    ${info.calc}
+                </div>
+            </div>
+        `;
+        
+        // Finde die row-group des geklickten Feldes oder den Button-Container
+        let targetContainer;
+        
+        // Prüfe ob es ein Feld im Diagramm ist
+        const clickedField = document.querySelector(`[data-id="${mode}"]`);
+        if (clickedField) {
+            targetContainer = clickedField.closest('.row-group');
+        } else {
+            // Falls es ein Button ist (eth_h, ip_h, etc.), füge nach dem Diagramm ein
+            targetContainer = document.querySelector('.diagram');
+        }
+        
+        if (targetContainer) {
+            // Erstelle temporäres Element
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = mobileInfoHTML;
+            const mobileBox = tempDiv.firstElementChild;
+            
+            // Füge nach dem Container ein
+            if (targetContainer.classList.contains('row-group')) {
+                targetContainer.appendChild(mobileBox);
+            } else {
+                targetContainer.appendChild(mobileBox);
+            }
+            
+            // Scrolle zur Info Box
+            setTimeout(() => {
+                mobileBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
     }
 
     // Check if this is a composite mode (multiple fields)
@@ -168,16 +206,13 @@ function reset() {
         field.classList.remove('highlight', 'dimmed');
     });
     
-    // Placeholder wiederherstellen
+    // Placeholder wiederherstellen (Desktop)
     document.getElementById('title').innerText = currentDB.ui.title;
     document.getElementById('content').innerHTML = currentDB.ui.placeholder;
     
-    // Auf Mobile: Modal schließen
-    if (isMobile()) {
-        closeMobileModal();
-    }
+    // Entferne alle mobile Info Boxes
+    document.querySelectorAll('.mobile-info-box').forEach(box => box.remove());
 }
-
 
 /**
  * Initializes event listeners for all diagram fields
