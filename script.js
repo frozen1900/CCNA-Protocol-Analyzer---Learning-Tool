@@ -83,10 +83,17 @@ function updateUI() {
  * Highlights a specific protocol field and displays its information
  * @param {string} mode - Field identifier
  */
+/**
+ * Highlights a specific protocol field and displays its information
+ * @param {string} mode - Field identifier
+ */
 function highlightMode(mode) {
     // Toggle: Wenn derselbe Mode nochmal geklickt wird, reset ausführen
     if (currentMode === mode) {
         reset();
+        if (isMobile()) {
+            closeMobileModal();
+        }
         return;
     }
     
@@ -116,6 +123,11 @@ function highlightMode(mode) {
     `;
     
     document.getElementById('content').innerHTML = contentHTML;
+
+    // Auf Mobile: Modal öffnen
+    if (isMobile()) {
+        openMobileModal();
+    }
 
     // Check if this is a composite mode (multiple fields)
     const fieldsToHighlight = highlightMap[mode];
@@ -159,7 +171,13 @@ function reset() {
     // Placeholder wiederherstellen
     document.getElementById('title').innerText = currentDB.ui.title;
     document.getElementById('content').innerHTML = currentDB.ui.placeholder;
+    
+    // Auf Mobile: Modal schließen
+    if (isMobile()) {
+        closeMobileModal();
+    }
 }
+
 
 /**
  * Initializes event listeners for all diagram fields
@@ -181,8 +199,61 @@ function initFieldListeners() {
     });
 }
 
+/**
+ * Checks if device is mobile
+ */
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+/**
+ * Closes mobile modal
+ */
+function closeMobileModal() {
+    const infoPanel = document.querySelector('.info-panel');
+    infoPanel.classList.remove('active');
+    
+    // Nach Animation Modal-Klasse entfernen
+    setTimeout(() => {
+        if (!infoPanel.classList.contains('active')) {
+            infoPanel.classList.remove('mobile-modal');
+        }
+    }, 300);
+}
+
+/**
+ * Opens mobile modal with info
+ */
+function openMobileModal() {
+    const infoPanel = document.querySelector('.info-panel');
+    infoPanel.classList.add('mobile-modal');
+    
+    // Trigger reflow für Animation
+    void infoPanel.offsetWidth;
+    
+    infoPanel.classList.add('active');
+}
+/**
+ * Initializes mobile modal close button
+ */
+function initMobileModal() {
+    const infoPanel = document.querySelector('.info-panel');
+    
+    // Close Button hinzufügen falls nicht vorhanden
+    let closeBtn = infoPanel.querySelector('.mobile-close-btn');
+    if (!closeBtn) {
+        closeBtn = document.createElement('button');
+        closeBtn.className = 'mobile-close-btn';
+        closeBtn.innerHTML = '✕ Close';
+        closeBtn.setAttribute('aria-label', 'Close information panel');
+        closeBtn.addEventListener('click', closeMobileModal);
+        infoPanel.insertBefore(closeBtn, infoPanel.firstChild);
+    }
+}
+
 // Initialize application on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     updateUI();
     initFieldListeners();
+    initMobileModal();
 });
