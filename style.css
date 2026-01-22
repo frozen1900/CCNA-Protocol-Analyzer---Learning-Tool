@@ -275,44 +275,54 @@ body {
     font-weight: 700;
 }
 
-/* Modal/Overlay für Mobile */
-.mobile-close-btn {
+/* Mobile Info Box - wird dynamisch eingefügt */
+.mobile-info-box {
     display: none;
-    position: sticky;
-    top: 0;
-    background: var(--alert);
-    color: white;
-    border: none;
+    background: white;
     padding: 16px;
+    margin: 8px 0;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--alert);
+    box-shadow: 0 4px 12px var(--shadow);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-info-box h3 {
     font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-    z-index: 10;
-    box-shadow: 0 2px 8px var(--shadow);
+    margin: 0 0 12px 0;
+    color: var(--dark);
+    border-bottom: 2px solid var(--alert);
+    padding-bottom: 8px;
 }
 
-.info-panel.mobile-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    max-height: 100vh;
-    overflow-y: auto;
-    border-radius: 0;
-    box-shadow: none;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+.mobile-info-box p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 12px;
 }
 
-.info-panel.mobile-modal.active {
-    transform: translateY(0);
+.mobile-info-box .why-box,
+.mobile-info-box .calc-box {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 12px;
+    line-height: 1.5;
 }
 
-.info-panel.mobile-modal .mobile-close-btn {
-    display: block;
+.mobile-info-box .why-box strong,
+.mobile-info-box .calc-box strong {
+    font-size: 13px;
 }
 
 /* Responsive Design */
@@ -367,7 +377,7 @@ body {
     
     .btn {
         padding: 12px 10px;
-        font-size: 12px;
+        font-size: 11px;
         min-height: 48px;
         white-space: normal;
         line-height: 1.3;
@@ -379,7 +389,7 @@ body {
     
     .main-layout {
         flex-direction: column;
-        gap: 0;
+        gap: 20px;
     }
     
     .diagram {
@@ -390,6 +400,7 @@ body {
     .row-group {
         padding: 10px;
         gap: 6px;
+        position: relative;
     }
     
     .group-label {
@@ -406,7 +417,6 @@ body {
     .field {
         padding: 10px 6px;
         font-size: 10px;
-        min-width: 60px !important;
         min-height: 44px;
         flex: 1 1 auto;
     }
@@ -414,65 +424,99 @@ body {
     .field b {
         font-size: 11px;
         margin-bottom: 3px;
+        word-break: break-word;
     }
     
     .field span {
         font-size: 9px;
     }
     
-    .field.w-4 {
-        flex: 1 1 100% !important;
-        width: 100%;
-    }
-    
-    .field.w-mac {
-        flex: 1 1 calc(50% - 2px);
-        min-width: 120px;
-    }
-    
-    .field.w-typ {
-        flex: 1 1 100%;
-        min-width: 80px;
-    }
-    
-    .field.w-pld {
-        flex: 1 1 70%;
+    /* Preamble und SFD nebeneinander */
+    .field.w-7 {
+        flex: 3 1 65%;
         min-width: 180px;
     }
     
+    .field.w-1 {
+        flex: 1 1 30%;
+        min-width: 80px;
+    }
+    
+    /* MAC-Adressen nebeneinander */
+    .field.w-mac {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 140px;
+    }
+    
+    /* Type volle Breite */
+    .field.w-typ {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+    
+    /* Kleine Bit-Felder nebeneinander */
+    .field.bits-4 {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 75px;
+    }
+    
+    .field.bits-6 {
+        flex: 1.5 1 60%;
+        min-width: 90px;
+    }
+    
+    .field.bits-2 {
+        flex: 0.8 1 35%;
+        min-width: 65px;
+    }
+    
+    .field.bits-3 {
+        flex: 1 1 30%;
+        min-width: 70px;
+    }
+    
+    .field.bits-13 {
+        flex: 2 1 65%;
+        min-width: 140px;
+    }
+    
+    /* Total Length, Identification, etc */
+    .field.w-2 {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 110px;
+    }
+    
+    /* IP-Adressen volle Breite */
+    .field.w-4 {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+    
+    /* Options und Padding nebeneinander */
+    .field.w-opt {
+        flex: 2 1 65%;
+        min-width: 140px;
+    }
+    
+    .field.w-pad {
+        flex: 1 1 30%;
+        min-width: 80px;
+    }
+    
+    /* Payload und FCS */
+    .field.w-pld {
+        flex: 3 1 70%;
+        min-width: 200px;
+    }
+    
+    /* Desktop Info Panel ausblenden auf Mobile */
     .info-panel {
         display: none;
     }
     
-    .info-panel.mobile-modal {
+    /* Mobile Info Box anzeigen */
+    .mobile-info-box {
         display: block;
-        padding: 0;
-    }
-    
-    .info-panel.mobile-modal h2 {
-        margin: 0;
-        padding: 20px 16px 16px;
-        background: white;
-    }
-    
-    .info-panel.mobile-modal #content {
-        padding: 0 16px 20px;
-    }
-    
-    .info-panel h2 {
-        font-size: 18px;
-    }
-    
-    .info-panel p {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-    
-    .why-box,
-    .calc-box {
-        padding: 12px;
-        margin: 12px 0;
-        font-size: 13px;
     }
 }
 
@@ -503,7 +547,7 @@ body {
     
     .btn {
         padding: 12px 10px;
-        font-size: 12px;
+        font-size: 11px;
         width: 100%;
     }
     
@@ -525,28 +569,14 @@ body {
         font-size: 8px;
     }
     
-    .field.bits-4,
-    .field.bits-6,
-    .field.bits-2,
-    .field.bits-3,
-    .field.w-1,
-    .field.w-2 {
-        flex: 1 1 calc(50% - 2px);
-        min-width: 60px;
+    .field.w-7 {
+        flex: 1 1 60%;
+        min-width: 150px;
     }
     
-    .info-panel h2 {
-        font-size: 16px;
-    }
-    
-    .info-panel p {
-        font-size: 13px;
-    }
-    
-    .why-box,
-    .calc-box {
-        padding: 10px;
-        font-size: 12px;
+    .field.w-1 {
+        flex: 1 1 35%;
+        min-width: 70px;
     }
 }
 
