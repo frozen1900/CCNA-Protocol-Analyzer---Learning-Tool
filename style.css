@@ -940,3 +940,37 @@ body {
         display: none;
     }
 }
+
+/* =========================================================
+   FINAL MOBILE SAFETY NET
+   Prevent any desktop min-width rule from forcing horizontal overflow.
+   Keep this at the END of the file.
+   ========================================================= */
+@media (max-width: 600px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .main-layout,
+  .diagram,
+  .row-group,
+  .row,
+  .field {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Override the desktop min-width constraints */
+  .field.w-mac,
+  .field.w-typ,
+  .field.w-1,
+  .field.w-2,
+  .field.w-4,
+  .field.w-7,
+  .field.w-opt,
+  .field.w-pad,
+  .field.w-pld {
+    min-width: 0 !important;
+  }
+}
