@@ -338,8 +338,20 @@ body {
         width: 100%;
     }
 }
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    .info-panel {
+        max-height: none;
+        width: 100%;
+    }
+}
 
-@media (max-width: 768px) {
+/* Tablet und große Phones (600px - 768px) */
+@media (max-width: 768px) and (min-width: 601px) {
     body {
         padding: 10px;
     }
@@ -370,7 +382,6 @@ body {
         padding-right: 90px;
     }
     
-    /* Mobile: Buttons im Grid */
     .concept-nav {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -407,6 +418,188 @@ body {
     }
     
     .group-label {
+        font-size: 12px;
+        margin-bottom: 4px;
+        font-weight: 800;
+    }
+    
+    .row {
+        flex-wrap: wrap;
+        gap: 4px;
+        width: 100%;
+    }
+    
+    .field {
+        padding: 11px 7px;
+        font-size: 10px;
+        min-height: 44px;
+        flex: 1 1 auto;
+    }
+    
+    .field b {
+        font-size: 11px;
+        margin-bottom: 3px;
+        word-break: break-word;
+    }
+    
+    .field span {
+        font-size: 9px;
+    }
+    
+    /* Preamble und SFD nebeneinander */
+    .field.w-7 {
+        flex: 3 1 70%;
+        min-width: 200px;
+    }
+    
+    .field.w-1 {
+        flex: 1 1 25%;
+        min-width: 85px;
+    }
+    
+    /* MAC-Adressen nebeneinander */
+    .field.w-mac {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 160px;
+    }
+    
+    /* Type volle Breite */
+    .field.w-typ {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+    
+    /* Kleine Bit-Felder nebeneinander - besser lesbar auf größeren Phones */
+    .field.bits-4 {
+        flex: 1 1 calc(25% - 3px);
+        min-width: 85px;
+    }
+    
+    .field.bits-6 {
+        flex: 1.5 1 calc(30% - 3px);
+        min-width: 100px;
+    }
+    
+    .field.bits-2 {
+        flex: 0.8 1 calc(20% - 3px);
+        min-width: 70px;
+    }
+    
+    .field.bits-3 {
+        flex: 1 1 calc(20% - 3px);
+        min-width: 75px;
+    }
+    
+    .field.bits-13 {
+        flex: 2 1 calc(50% - 3px);
+        min-width: 150px;
+    }
+    
+    /* Total Length, Identification, etc */
+    .field.w-2 {
+        flex: 1 1 calc(50% - 2px);
+        min-width: 120px;
+    }
+    
+    /* IP-Adressen volle Breite */
+    .field.w-4[data-id="sip"],
+    .field.w-4[data-id="dip"] {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+    
+    /* Options und Padding nebeneinander */
+    .field.w-opt {
+        flex: 2 1 70%;
+        min-width: 160px;
+    }
+    
+    .field.w-pad {
+        flex: 1 1 25%;
+        min-width: 85px;
+    }
+    
+    /* Payload und FCS nebeneinander */
+    .field.w-pld {
+        flex: 3 1 70%;
+        min-width: 220px;
+    }
+    
+    .field.w-4[data-id="fcs"] {
+        flex: 1 1 25%;
+        min-width: 110px;
+    }
+    
+    .info-panel {
+        display: none;
+    }
+}
+
+/* Mittelgroße Phones (481px - 600px) - wie Pixel 10 Pro */
+@media (max-width: 600px) and (min-width: 481px) {
+    body {
+        padding: 10px;
+    }
+    
+    .nav-container {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .lang-switch {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+    
+    .lang-switch button {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 36px;
+    }
+    
+    h1 {
+        font-size: 18px;
+        text-align: center;
+        margin: 0 0 12px 0;
+        padding-right: 90px;
+    }
+    
+    .concept-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        width: 100%;
+    }
+    
+    .btn {
+        padding: 12px 10px;
+        font-size: 11px;
+        min-height: 48px;
+        white-space: normal;
+        line-height: 1.3;
+    }
+    
+    .btn.reset-btn {
+        grid-column: 1 / -1;
+    }
+    
+    .main-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .diagram {
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .row-group {
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .group-label {
         font-size: 11px;
         margin-bottom: 4px;
         font-weight: 800;
@@ -437,19 +630,19 @@ body {
     
     /* Preamble und SFD nebeneinander */
     .field.w-7 {
-        flex: 3 1 65%;
-        min-width: 180px;
+        flex: 3 1 68%;
+        min-width: 190px;
     }
     
     .field.w-1 {
-        flex: 1 1 30%;
+        flex: 1 1 28%;
         min-width: 80px;
     }
     
     /* MAC-Adressen nebeneinander */
     .field.w-mac {
         flex: 1 1 calc(50% - 2px);
-        min-width: 140px;
+        min-width: 145px;
     }
     
     /* Type volle Breite */
@@ -458,39 +651,39 @@ body {
         min-width: 100%;
     }
     
-    /* Kleine Bit-Felder nebeneinander */
+    /* Bit-Felder: Ver, IHL, DSCP, ECN und Total Length in einer Reihe */
     .field.bits-4 {
-        flex: 1 1 calc(50% - 2px);
+        flex: 1 1 calc(22% - 3px);
         min-width: 75px;
     }
     
     .field.bits-6 {
-        flex: 1.5 1 60%;
+        flex: 1.5 1 calc(28% - 3px);
         min-width: 90px;
     }
     
     .field.bits-2 {
-        flex: 0.8 1 35%;
+        flex: 0.8 1 calc(18% - 3px);
         min-width: 65px;
     }
     
+    .field.w-2 {
+        flex: 1.2 1 calc(32% - 3px);
+        min-width: 100px;
+    }
+    
+    /* Identification, Flags, Offset in einer Reihe */
     .field.bits-3 {
-        flex: 1 1 30%;
+        flex: 1 1 calc(20% - 3px);
         min-width: 70px;
     }
     
     .field.bits-13 {
-        flex: 2 1 65%;
+        flex: 2.5 1 calc(55% - 3px);
         min-width: 140px;
     }
     
-    /* Total Length, Identification, etc */
-    .field.w-2 {
-        flex: 1 1 calc(50% - 2px);
-        min-width: 110px;
-    }
-    
-    /* IP-Adressen und Source IP / Dest IP bleiben volle Breite */
+    /* IP-Adressen volle Breite */
     .field.w-4[data-id="sip"],
     .field.w-4[data-id="dip"] {
         flex: 1 1 100%;
@@ -499,19 +692,19 @@ body {
     
     /* Options und Padding nebeneinander */
     .field.w-opt {
-        flex: 2 1 65%;
-        min-width: 140px;
+        flex: 2.5 1 68%;
+        min-width: 150px;
     }
     
     .field.w-pad {
-        flex: 1 1 30%;
+        flex: 1 1 28%;
         min-width: 80px;
     }
     
-    /* Payload und FCS nebeneinander - FCS schmaler */
+    /* Payload und FCS nebeneinander */
     .field.w-pld {
         flex: 3 1 68%;
-        min-width: 200px;
+        min-width: 210px;
     }
     
     .field.w-4[data-id="fcs"] {
@@ -519,12 +712,12 @@ body {
         min-width: 100px;
     }
     
-    /* Desktop Info Panel ausblenden auf Mobile */
     .info-panel {
         display: none;
     }
 }
 
+/* Kleine Phones (bis 480px) - Reihen farblich markiert */
 @media (max-width: 480px) {
     body {
         padding: 8px;
@@ -560,10 +753,47 @@ body {
         grid-column: span 1;
     }
     
+    .main-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .diagram {
+        gap: 10px;
+    }
+    
+    .row-group {
+        padding: 8px;
+        gap: 4px;
+    }
+    
+    .group-label {
+        font-size: 11px;
+        margin-bottom: 4px;
+        font-weight: 800;
+    }
+    
+    /* Reihen farblich markieren für bessere Übersicht */
+    .row {
+        flex-wrap: wrap;
+        gap: 3px;
+        width: 100%;
+        padding: 6px;
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.02);
+        margin-bottom: 4px;
+    }
+    
+    .row:nth-child(even) {
+        background: rgba(0, 0, 0, 0.04);
+    }
+    
     .field {
         padding: 8px 4px;
         font-size: 9px;
         min-height: 40px;
+        flex: 1 1 100%;
+        max-width: 100%;
     }
     
     .field b {
@@ -574,14 +804,31 @@ body {
         font-size: 8px;
     }
     
+    /* Nur größere Felder dürfen nebeneinander */
     .field.w-7 {
-        flex: 1 1 60%;
+        flex: 1 1 65%;
         min-width: 150px;
     }
     
     .field.w-1 {
-        flex: 1 1 35%;
+        flex: 1 1 30%;
         min-width: 70px;
+    }
+    
+    .field.w-mac {
+        flex: 1 1 100%;
+    }
+    
+    .field.w-pld {
+        flex: 1 1 100%;
+    }
+    
+    .field.w-4[data-id="fcs"] {
+        flex: 1 1 100%;
+    }
+    
+    .info-panel {
+        display: none;
     }
 }
 
