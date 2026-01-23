@@ -275,7 +275,7 @@ body {
     font-weight: 700;
 }
 
-/* Mobile Info Box - wird dynamisch eingefügt */
+/* Mobile Info Box - dynamically inserted */
 .mobile-info-box {
     background: white;
     padding: 16px;
@@ -338,19 +338,8 @@ body {
         width: 100%;
     }
 }
-/* Responsive Design */
-@media (max-width: 1400px) {
-    .main-layout {
-        flex-direction: column;
-    }
-    
-    .info-panel {
-        max-height: none;
-        width: 100%;
-    }
-}
 
-/* Tablet und große Phones (600px - 768px) */
+/* Tablets and large phones (600px - 768px) */
 @media (max-width: 768px) and (min-width: 601px) {
     body {
         padding: 10px;
@@ -406,15 +395,26 @@ body {
         gap: 20px;
     }
     
+    /* Layer groups side by side where possible */
     .diagram {
         gap: 10px;
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
     
-    .row-group {
+    .diagram .row-group {
+        flex: 1 1 calc(50% - 5px);
+        min-width: 280px;
         padding: 10px;
         gap: 6px;
         position: relative;
+    }
+    
+    /* Layer 3 (IPv4 Header) full width - it has many fields */
+    .diagram .row-group:nth-child(3) {
+        flex: 1 1 100%;
     }
     
     .group-label {
@@ -446,7 +446,7 @@ body {
         font-size: 9px;
     }
     
-    /* Preamble und SFD nebeneinander */
+    /* Preamble and SFD side by side */
     .field.w-7 {
         flex: 3 1 70%;
         min-width: 200px;
@@ -457,19 +457,19 @@ body {
         min-width: 85px;
     }
     
-    /* MAC-Adressen nebeneinander */
+    /* MAC addresses side by side */
     .field.w-mac {
         flex: 1 1 calc(50% - 2px);
         min-width: 160px;
     }
     
-    /* Type volle Breite */
+    /* Type full width */
     .field.w-typ {
         flex: 1 1 100%;
         min-width: 100%;
     }
     
-    /* Kleine Bit-Felder nebeneinander - besser lesbar auf größeren Phones */
+    /* Small bit fields side by side - more readable on larger phones */
     .field.bits-4 {
         flex: 1 1 calc(25% - 3px);
         min-width: 85px;
@@ -501,14 +501,14 @@ body {
         min-width: 120px;
     }
     
-    /* IP-Adressen volle Breite */
+    /* IP addresses full width */
     .field.w-4[data-id="sip"],
     .field.w-4[data-id="dip"] {
         flex: 1 1 100%;
         min-width: 100%;
     }
     
-    /* Options und Padding nebeneinander */
+    /* Options and Padding side by side */
     .field.w-opt {
         flex: 2 1 70%;
         min-width: 160px;
@@ -519,7 +519,7 @@ body {
         min-width: 85px;
     }
     
-    /* Payload und FCS nebeneinander */
+    /* Payload and FCS side by side */
     .field.w-pld {
         flex: 3 1 70%;
         min-width: 220px;
@@ -535,7 +535,7 @@ body {
     }
 }
 
-/* Mittelgroße Phones (481px - 600px) - wie Pixel 10 Pro */
+/* Medium phones (481px - 600px) - like Pixel 10 Pro */
 @media (max-width: 600px) and (min-width: 481px) {
     body {
         padding: 10px;
@@ -589,14 +589,26 @@ body {
         gap: 20px;
     }
     
+    /* Layer groups side by side where possible */
     .diagram {
         gap: 10px;
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
     
-    .row-group {
+    .diagram .row-group {
+        flex: 1 1 calc(50% - 5px);
+        min-width: 260px;
         padding: 10px;
         gap: 6px;
+        overflow: hidden;
+    }
+    
+    /* Layer 3 (IPv4 Header) full width - it has many fields */
+    .diagram .row-group:nth-child(3) {
+        flex: 1 1 100%;
     }
     
     .group-label {
@@ -612,104 +624,120 @@ body {
     }
     
     .field {
-        padding: 10px 6px;
-        font-size: 10px;
+        padding: 10px 5px;
+        font-size: 9.5px;
         min-height: 44px;
         flex: 1 1 auto;
+        box-sizing: border-box;
     }
     
     .field b {
-        font-size: 11px;
+        font-size: 10.5px;
         margin-bottom: 3px;
         word-break: break-word;
     }
     
     .field span {
-        font-size: 9px;
+        font-size: 8.5px;
     }
     
-    /* Preamble und SFD nebeneinander */
+    /* Preamble and SFD side by side */
     .field.w-7 {
         flex: 3 1 68%;
-        min-width: 190px;
+        min-width: 0;
+        max-width: 70%;
     }
     
     .field.w-1 {
         flex: 1 1 28%;
-        min-width: 80px;
+        min-width: 0;
+        max-width: 30%;
     }
     
-    /* MAC-Adressen nebeneinander */
+    /* MAC addresses side by side */
     .field.w-mac {
         flex: 1 1 calc(50% - 2px);
-        min-width: 145px;
+        min-width: 0;
+        max-width: calc(50% - 2px);
     }
     
-    /* Type volle Breite */
+    /* Type full width */
     .field.w-typ {
         flex: 1 1 100%;
-        min-width: 100%;
+        min-width: 0;
+        max-width: 100%;
     }
     
-    /* Bit-Felder: Ver, IHL, DSCP, ECN und Total Length in einer Reihe */
+    /* Bit fields: Ver, IHL, DSCP, ECN and Total Length in one row */
     .field.bits-4 {
-        flex: 1 1 calc(22% - 3px);
-        min-width: 75px;
+        flex: 1 1 calc(20% - 3px);
+        min-width: 0;
+        max-width: calc(22% - 3px);
     }
     
     .field.bits-6 {
-        flex: 1.5 1 calc(28% - 3px);
-        min-width: 90px;
+        flex: 1.5 1 calc(26% - 3px);
+        min-width: 0;
+        max-width: calc(28% - 3px);
     }
     
     .field.bits-2 {
-        flex: 0.8 1 calc(18% - 3px);
-        min-width: 65px;
+        flex: 0.8 1 calc(16% - 3px);
+        min-width: 0;
+        max-width: calc(18% - 3px);
     }
     
     .field.w-2 {
-        flex: 1.2 1 calc(32% - 3px);
-        min-width: 100px;
+        flex: 1.2 1 calc(30% - 3px);
+        min-width: 0;
+        max-width: calc(32% - 3px);
     }
     
-    /* Identification, Flags, Offset in einer Reihe */
+    /* Identification, Flags, Offset in one row */
     .field.bits-3 {
-        flex: 1 1 calc(20% - 3px);
-        min-width: 70px;
+        flex: 1 1 calc(18% - 3px);
+        min-width: 0;
+        max-width: calc(20% - 3px);
     }
     
     .field.bits-13 {
-        flex: 2.5 1 calc(55% - 3px);
-        min-width: 140px;
+        flex: 2.5 1 calc(52% - 3px);
+        min-width: 0;
+        max-width: calc(55% - 3px);
     }
     
-    /* IP-Adressen volle Breite */
+    /* IP addresses full width */
     .field.w-4[data-id="sip"],
     .field.w-4[data-id="dip"] {
         flex: 1 1 100%;
-        min-width: 100%;
+        min-width: 0;
+        max-width: 100%;
     }
     
-    /* Options und Padding nebeneinander */
+    /* Options and Padding side by side */
     .field.w-opt {
         flex: 2.5 1 68%;
-        min-width: 150px;
+        min-width: 0;
+        max-width: 70%;
     }
     
     .field.w-pad {
         flex: 1 1 28%;
-        min-width: 80px;
+        min-width: 0;
+        max-width: 30%;
     }
     
-    /* Payload und FCS nebeneinander */
+    /* Payload and FCS side by side */
     .field.w-pld {
         flex: 3 1 68%;
-        min-width: 210px;
+        min-width: 0;
+        max-width: 70%;
     }
     
     .field.w-4[data-id="fcs"] {
         flex: 1 1 28%;
-        min-width: 100px;
+        min-width: 0;
+        max-width: 30%;
     }
     
     .info-panel {
@@ -717,7 +745,7 @@ body {
     }
 }
 
-/* Kleine Phones (bis 480px) - Reihen farblich markiert */
+/* Small phones (up to 480px) - rows color-coded */
 @media (max-width: 480px) {
     body {
         padding: 8px;
@@ -773,7 +801,7 @@ body {
         font-weight: 800;
     }
     
-    /* Reihen farblich markieren für bessere Übersicht */
+    /* Color-code rows for better overview */
     .row {
         flex-wrap: wrap;
         gap: 3px;
@@ -804,7 +832,7 @@ body {
         font-size: 8px;
     }
     
-    /* Nur größere Felder dürfen nebeneinander */
+    /* Only larger fields allowed side by side */
     .field.w-7 {
         flex: 1 1 65%;
         min-width: 150px;
@@ -844,7 +872,7 @@ body {
     }
 }
 
-/* Desktop: Mobile Info Box verstecken */
+/* Desktop: Hide mobile info box */
 @media (min-width: 769px) {
     .mobile-info-box {
         display: none;
