@@ -189,7 +189,6 @@ function highlightMode(mode) {
     }
 }
 
-
 /**
  * Resets all highlighting and dimming effects
  */
@@ -230,61 +229,8 @@ function initFieldListeners() {
     });
 }
 
-/**
- * Checks if device is mobile
- */
-function isMobile() {
-    return window.innerWidth <= 768;
-}
-
-/**
- * Closes mobile modal
- */
-function closeMobileModal() {
-    const infoPanel = document.querySelector('.info-panel');
-    infoPanel.classList.remove('active');
-    
-    // Nach Animation Modal-Klasse entfernen
-    setTimeout(() => {
-        if (!infoPanel.classList.contains('active')) {
-            infoPanel.classList.remove('mobile-modal');
-        }
-    }, 300);
-}
-
-/**
- * Opens mobile modal with info
- */
-function openMobileModal() {
-    const infoPanel = document.querySelector('.info-panel');
-    infoPanel.classList.add('mobile-modal');
-    
-    // Trigger reflow für Animation
-    void infoPanel.offsetWidth;
-    
-    infoPanel.classList.add('active');
-}
-/**
- * Initializes mobile modal close button
- */
-function initMobileModal() {
-    const infoPanel = document.querySelector('.info-panel');
-    
-    // Close Button hinzufügen falls nicht vorhanden
-    let closeBtn = infoPanel.querySelector('.mobile-close-btn');
-    if (!closeBtn) {
-        closeBtn = document.createElement('button');
-        closeBtn.className = 'mobile-close-btn';
-        closeBtn.innerHTML = '✕ Close';
-        closeBtn.setAttribute('aria-label', 'Close information panel');
-        closeBtn.addEventListener('click', closeMobileModal);
-        infoPanel.insertBefore(closeBtn, infoPanel.firstChild);
-    }
-}
-
 // Initialize application on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     updateUI();
     initFieldListeners();
-    initMobileModal();
 });
