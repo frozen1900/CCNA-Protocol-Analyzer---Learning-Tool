@@ -327,7 +327,11 @@ body {
     font-size: 13px;
 }
 
-/* Responsive Design */
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Desktop to Tablet transition */
 @media (max-width: 1400px) {
     .main-layout {
         flex-direction: column;
@@ -339,7 +343,7 @@ body {
     }
 }
 
-/* Tablets and large phones (600px - 768px) */
+/* Tablets and large phones (601px - 768px) */
 @media (max-width: 768px) and (min-width: 601px) {
     body {
         padding: 10px;
@@ -395,7 +399,7 @@ body {
         gap: 20px;
     }
     
-    /* Layer groups side by side where possible */
+    /* Layer groups arranged side by side where possible */
     .diagram {
         gap: 10px;
         width: 100%;
@@ -414,7 +418,7 @@ body {
         box-sizing: border-box;
     }
     
-    /* Layer 3 (IPv4 Header) full width - it has many fields */
+    /* Layer 3 (IPv4 Header) takes full width due to many fields */
     .diagram .row-group:nth-child(3) {
         flex: 1 1 100%;
         max-width: 100%;
@@ -469,14 +473,14 @@ body {
         max-width: calc(50% - 2px);
     }
     
-    /* Type full width */
+    /* Type takes full width */
     .field.w-typ {
         flex: 1 1 100%;
         min-width: 0;
         max-width: 100%;
     }
     
-    /* Small bit fields side by side - more readable on larger phones */
+    /* Small bit fields side by side */
     .field.bits-4 {
         flex: 1 1 calc(25% - 3px);
         min-width: 0;
@@ -507,14 +511,14 @@ body {
         max-width: calc(50% - 2px);
     }
     
-    /* Total Length, Identification, etc */
+    /* 2-byte fields */
     .field.w-2 {
         flex: 1 1 calc(50% - 2px);
         min-width: 0;
         max-width: calc(50% - 2px);
     }
     
-    /* IP addresses full width */
+    /* IP addresses take full width */
     .field.w-4[data-id="sip"],
     .field.w-4[data-id="dip"] {
         flex: 1 1 100%;
@@ -553,7 +557,7 @@ body {
     }
 }
 
-/* Medium phones (481px - 600px) - like Pixel 10 Pro */
+/* Medium phones (481px - 600px) */
 @media (max-width: 600px) and (min-width: 481px) {
     body {
         padding: 8px;
@@ -612,7 +616,7 @@ body {
         box-sizing: border-box;
     }
     
-    /* Layer groups side by side where possible */
+    /* Layer groups arranged side by side where possible */
     .diagram {
         gap: 8px;
         width: 100%;
@@ -633,7 +637,7 @@ body {
         box-sizing: border-box;
     }
     
-    /* Layer 3 (IPv4 Header) full width - it has many fields */
+    /* Layer 3 (IPv4 Header) takes full width */
     .diagram .row-group:nth-child(3) {
         flex: 1 1 100%;
         max-width: 100%;
@@ -673,7 +677,7 @@ body {
         line-height: 1.1;
     }
     
-    /* Preamble and SFD side by side - NO WRAP */
+    /* Preamble and SFD remain side by side - no wrapping */
     .field.w-7 {
         flex: 7 1 0;
         min-width: 0;
@@ -684,7 +688,7 @@ body {
         min-width: 0;
     }
     
-    /* MAC addresses - allow wrapping for Layer 2 */
+    /* Layer 2: Allow wrapping for MAC addresses */
     .diagram .row-group:nth-child(2) .row {
         flex-wrap: wrap;
     }
@@ -694,7 +698,7 @@ body {
         min-width: 0;
     }
     
-    /* Type full width in Layer 2 */
+    /* Type takes full width in Layer 2 */
     .field.w-typ {
         flex: 1 1 100%;
         min-width: 0;
@@ -705,7 +709,7 @@ body {
         flex-wrap: wrap;
     }
     
-    /* Bit fields: Ver, IHL, DSCP, ECN and Total Length in one row */
+    /* Bit fields: Version, IHL, DSCP, ECN and Total Length in one row */
     .field.bits-4 {
         flex: 1 1 calc(19% - 2px);
         min-width: 0;
@@ -737,14 +741,14 @@ body {
         min-width: 0;
     }
     
-    /* IP addresses full width */
+    /* IP addresses take full width */
     .field.w-4[data-id="sip"],
     .field.w-4[data-id="dip"] {
         flex: 1 1 100%;
         min-width: 0;
     }
     
-    /* Options and Padding side by side - NO WRAP */
+    /* Options and Padding remain side by side - no wrapping */
     .field.w-opt {
         flex: 3 1 0;
         min-width: 0;
@@ -755,7 +759,7 @@ body {
         min-width: 0;
     }
     
-    /* Payload and FCS side by side - NO WRAP */
+    /* Payload and FCS remain side by side - no wrapping */
     .diagram .row-group:nth-child(4) .row {
         flex-wrap: nowrap;
     }
@@ -775,7 +779,7 @@ body {
     }
 }
 
-/* Small phones (up to 480px) - rows color-coded */
+/* Small phones (up to 480px) */
 @media (max-width: 480px) {
     body {
         padding: 8px;
@@ -831,25 +835,30 @@ body {
         font-weight: 800;
     }
     
-    /* Color-code rows for better overview */
+    /* Color-coded rows for better visual separation */
     .row {
-        flex-wrap: wrap;
+        display: flex;
         gap: 3px;
         width: 100%;
         padding: 6px;
         border-radius: 6px;
         background: rgba(0, 0, 0, 0.02);
         margin-bottom: 4px;
+        flex-wrap: wrap;
     }
     
     .row:nth-child(even) {
         background: rgba(0, 0, 0, 0.04);
     }
     
+    /* Default: all fields take full width */
     .field {
         padding: 8px 4px;
         font-size: 9px;
         min-height: 40px;
+        box-sizing: border-box;
+        border-width: 1px;
+        min-width: 0;
         flex: 1 1 100%;
         max-width: 100%;
     }
@@ -862,27 +871,49 @@ body {
         font-size: 8px;
     }
     
-    /* Only larger fields allowed side by side */
-    .field.w-7 {
-        flex: 1 1 65%;
-        min-width: 150px;
+    /* Layer 1: Force Preamble and SFD to stay side by side */
+    .row-group:nth-child(1) .row {
+        flex-wrap: nowrap;
     }
     
-    .field.w-1 {
-        flex: 1 1 30%;
-        min-width: 70px;
+    .row-group:nth-child(1) .field.w-7 {
+        flex: 7 1 0;
+        max-width: none;
     }
     
-    .field.w-mac {
+    .row-group:nth-child(1) .field.w-1 {
+        flex: 1 1 0;
+        max-width: none;
+    }
+    
+    /* Layer 2: MAC addresses side by side, Type takes full width */
+    .row-group:nth-child(2) .row {
+        flex-wrap: wrap;
+    }
+    
+    .row-group:nth-child(2) .field.w-mac {
+        flex: 1 1 calc(50% - 2px);
+        max-width: calc(50% - 2px);
+    }
+    
+    .row-group:nth-child(2) .field.w-typ {
         flex: 1 1 100%;
+        max-width: 100%;
     }
     
-    .field.w-pld {
-        flex: 1 1 100%;
+    /* Payload & Trailer: Force Payload and FCS to stay side by side */
+    .row-group:nth-child(4) .row {
+        flex-wrap: nowrap;
     }
     
-    .field.w-4[data-id="fcs"] {
-        flex: 1 1 100%;
+    .row-group:nth-child(4) .field.w-pld {
+        flex: 12 1 0;
+        max-width: none;
+    }
+    
+    .row-group:nth-child(4) .field.w-4[data-id="fcs"] {
+        flex: 4 1 0;
+        max-width: none;
     }
     
     .info-panel {
@@ -890,6 +921,7 @@ body {
     }
 }
 
+/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
     .field:active:not(.dimmed) {
         transform: scale(0.98);
